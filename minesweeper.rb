@@ -1,4 +1,4 @@
-class MinesweeperTui < Formula
+class Minesweeper < Formula
   desc "MineSweeper TUI"
   homepage "https://github.com/Pansther/minesweeper-tui"
   version "0.1.0"
