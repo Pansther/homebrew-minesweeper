@@ -1,5 +1,5 @@
 class Minesweeper < Formula
-  desc "MineSweeper TUI"
+  desc "Vim-friendly Minesweeper TUI"
   homepage "https://github.com/Pansther/minesweeper-tui"
   version "0.1.0"
 
@@ -14,16 +14,17 @@ class Minesweeper < Formula
     sha256 "679292892f6008ee570deecd937f4f35f8d78c2eec619b56a66c239c9b6e118c"
   end
 
-def install
-    if OS.mac? && Hardware::CPU.intel?
-      bin.install "minesweeper-tui-darwin-x64" => "minesweeper-tui"
-    elsif OS.mac? && Hardware::CPU.arm?
-      bin.install "minesweeper-tui-darwin-arm64" => "minesweeper-tui"
-    elsif OS.linux?
-      bin.install "minesweeper-tui-linux-x64" => "minesweeper-tui"
+  def install
+    binary_name = if OS.mac?
+      Hardware::CPU.arm? ? "minesweeper-tui-darwin-arm64" : "minesweeper-tui-darwin-x64"
+    else
+      "minesweeper-tui-linux-x64"
     end
+
+    bin.install binary_name => "minesweeper"
   end
+
   test do
-    system "#{bin}/minesweeper", "--version"
+    assert_match "0.1.0", shell_output("#{bin}/minesweeper --version")
   end
 end
